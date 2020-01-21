@@ -1,0 +1,13 @@
+{
+    "name": "c5labs/stack_attribute",
+    "description": "Adds a 'stack' attribute type to your site.",
+    "type": "concrete5-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Green",
+            "email": "oliver@boxedcode.co.uk"
+        }
+    ],
+    "minimum-stability": "dev"
+}
