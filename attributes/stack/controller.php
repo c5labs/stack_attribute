@@ -30,10 +30,8 @@ class Controller extends \Concrete\Attribute\Number\Controller
 
     protected function getValueStackId()
     {
-        $value = $this->getAttributeValue()->getValueObject();
-
-        if ($value) {
-            return intval($value->getValue());
+        if (($value = $this->getAttributeValue()) && ($obj = $value->getValueObject())) {
+            return intval($obj->getValue());
         }
     }
 
