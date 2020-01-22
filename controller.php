@@ -120,23 +120,23 @@ class Controller extends Package
      */
     public function install()
     {
-
-        // Add your custom logic here that needs to be executed BEFORE package install.
-
-        $pkg = parent::install();
-
         // Install the attribute type.
         $typeFactory = \Core::make(\Concrete\Core\Attribute\TypeFactory::class);
-        $type = $typeFactory->add('stack', 'Stack', $pkg);
 
-        // Add it to the 'collection' attribute category.
-        $categoryService = \Core::make(\Concrete\Core\Attribute\Category\CategoryService::class);
-        $category = $categoryService->getByHandle('collection')->getController();
-        $category->associateAttributeKeyType($type);
+        if (!$typeFactory->getByHandle('stack')) {
+            $pkg = parent::install();
 
-        // Add your custom logic here that needs to be executed AFTER package install.
+            $type = $typeFactory->add('stack', 'Stack', $pkg);
 
-        return $pkg;
+            // Add it to the 'collection' attribute category.
+            $categoryService = \Core::make(\Concrete\Core\Attribute\Category\CategoryService::class);
+            $category = $categoryService->getByHandle('collection')->getController();
+            $category->associateAttributeKeyType($type);
+
+            return $pkg;
+        }
+
+        throw new \Exception('Cannot install. There is already an attribute type with the handle \'stack\'.');
     }
 
     /**
